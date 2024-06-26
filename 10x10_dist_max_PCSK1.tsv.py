@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Define the file path
-file_path = '/home/abera/data1/data1/ENSG00000175426___PCSK1__dist_max.tsv'
+file_path = '/Users/simonray/Downloads/ENSG00000175426___PCSK1__dist_max.tsv'
 
 # Check if the file exists at the specified path
 if not os.path.isfile(file_path):
@@ -20,6 +20,7 @@ else:
     subset_size = 10
 
     # Generate random subsets for each population
+    # this is generating a 3D dataset of size 10 x 10 x Num Populations, so 10x10x5
     subsets = []
     for _ in range(num_populations):
         rows = np.random.choice(data.index, subset_size, replace=False)
@@ -27,8 +28,15 @@ else:
         subset = data.loc[rows, cols]
         subsets.append(subset)
 
+
     # Combine all subsets into a single DataFrame
+    # You only need to do this
+    dfCombined = pd.DataFrame(subset)
+
+    # and write this out
+
     combined_subset = pd.concat(subsets, axis=1)
+    dfCombined = pd.DataFrame(subsets)
 
     # Save the combined subset to a new TSV file
     subset_file_path = '/home/abera/data1/data1/combined_subset_10x10.tsv'
