@@ -19,14 +19,10 @@ else:
     num_populations = 5
     subset_size = 10
 
-    # Generate random subsets for each population
-    # this is generating a 3D dataset of size 10 x 10 x Num Populations, so 10x10x5
-    subsets = []
-    for _ in range(num_populations):
-        rows = np.random.choice(data.index, subset_size, replace=False)
-        cols = np.random.choice(data.columns, subset_size, replace=False)
-        subset = data.loc[rows, cols]
-        subsets.append(subset)
+    rows = np.random.choice(data.index, subset_size, replace=False)
+    cols = np.random.choice(data.columns, subset_size, replace=False)
+    subset = data.loc[rows, cols]
+
 
 
     # Combine all subsets into a single DataFrame
@@ -35,13 +31,13 @@ else:
 
     # and write this out
 
-    combined_subset = pd.concat(subsets, axis=1)
-    dfCombined = pd.DataFrame(subsets)
+    #combined_subset = pd.concat(subsets, axis=1)
+    #dfCombined = pd.DataFrame(subsets)
 
     # Save the combined subset to a new TSV file
-    subset_file_path = '/home/abera/data1/data1/combined_subset_10x10.tsv'
-    combined_subset.to_csv(subset_file_path, sep='\t')
+    subset_file_path = '/Users/simonray/Downloads/ENSG00000175426___PCSK1__dist_max_10x10.tsv'
+    dfCombined.to_csv(subset_file_path, sep='\t')
 
     # Display the combined subset
-    print(combined_subset)
+    print(dfCombined)
     print(f"Combined subset saved to: {subset_file_path}")
